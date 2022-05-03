@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { App404 } from './components/App/App404';
+import { AppLoader } from './components/App/AppLoader';
+import { QueryClientProvider } from 'react-query';
+import { AppQueryClient } from './queryClient';
+
 import './App.css';
 
-function App() {
+const Home = React.lazy(() => import('./views/Home/Home'));
+const Vaults = React.lazy(() => import('./views/Vaults/Vaults'));
+
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Providers>
+      <BrowserRouter>
+        <Suspense fallback={<AppLoader />}>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="/vaults" element={<Vaults />} />
+            <Route path="*" element={<App404 />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </Providers>
+  );
+}
+
+function Providers(props: { children: React.ReactNode }): JSX.Element {
+  const { children } = props;
+
+  return (
+    <QueryClientProvider client={AppQueryClient}>
+      {children}
+    </QueryClientProvider>
   );
 }
 
