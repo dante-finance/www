@@ -1,14 +1,16 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { App404 } from './components/App/App404';
-import { AppLoader } from './components/App/AppLoader';
 import { QueryClientProvider } from 'react-query';
+
+import { App404 } from 'components/App/App404';
+import { AppLoader } from 'components/App/AppLoader';
+
 import { AppQueryClient } from './queryClient';
 
 import './App.css';
 
-const Home = React.lazy(() => import('./views/Home/Home'));
-const Vaults = React.lazy(() => import('./views/Vaults/Vaults'));
+const Home = lazy(async () => import('views/Home/Home'));
+const Vaults = lazy(async () => import('views/Vaults/Vaults'));
 
 function App(): JSX.Element {
   return (

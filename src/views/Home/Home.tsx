@@ -1,5 +1,6 @@
 import React from 'react';
-import { Page } from '../../components/Page/Page';
+
+import { Page } from 'components/Page/Page';
 
 export default function Home(): JSX.Element {
   return (
