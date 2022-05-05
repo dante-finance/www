@@ -37,7 +37,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./*.js src/**/*.ts[x]",
+    "lint": "eslint ./*.js src/**/*.ts src/**/*.tsx",
     "lint:fix": "npm run lint -- --fix"
   },
   "browserslist": {
