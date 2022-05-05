@@ -41,6 +41,16 @@ module.exports = {
             position: 'before',
           },
           {
+            pattern: 'contexts/**',
+            group: 'index',
+            position: 'before',
+          },
+          {
+            pattern: 'hooks/**',
+            group: 'index',
+            position: 'before',
+          },
+          {
             pattern: 'views/**',
             group: 'index',
             position: 'before',

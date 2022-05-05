@@ -6,5 +6,15 @@ interface PageProps {
 
 export function Page(props: PageProps): JSX.Element {
   const { children } = props;
-  return <main>{children}</main>;
+
+  return (
+    <>
+      <header className="App-header">
+        <nav>
+          <a href="/vaults">Vaults</a>
+        </nav>
+      </header>
+      <main>{children}</main>
+    </>
+  );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function App404(): JSX.Element {
+export function NotFound(): JSX.Element {
   return (
     <article
       style={{
