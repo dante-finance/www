@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { PageNav } from './Nav/PageNav';
+
 interface PageProps {
   children: React.ReactNode;
 }
@@ -10,9 +12,7 @@ export function Page(props: PageProps): JSX.Element {
   return (
     <>
       <header className="App-header">
-        <nav>
-          <a href="/vaults">Vaults</a>
-        </nav>
+        <PageNav />
       </header>
       <main>{children}</main>
     </>
