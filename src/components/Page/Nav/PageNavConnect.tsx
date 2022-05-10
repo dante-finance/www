@@ -22,7 +22,7 @@ const style = {
 };
 
 export function PageNavConnect(): JSX.Element {
-  const { connect } = useWallet();
+  const wallet = useWallet();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -34,16 +34,27 @@ export function PageNavConnect(): JSX.Element {
     setShowModal(false);
   }, []);
 
+  const handleDisconnect = useCallback(() => {
+    wallet.reset();
+  }, [wallet]);
+
   const handleMetamaskConnect = useCallback(() => {
-    connect('injected');
+    wallet.connect('injected');
     setShowModal(false);
-  }, [connect]);
+  }, [wallet]);
 
   return (
     <>
-      <Button onClick={handleModalOpen} variant="contained">
-        Connect
-      </Button>
+      {wallet.status === 'connected' ? (
+        <Button onClick={handleDisconnect} variant="contained">
+          {wallet.account}
+        </Button>
+      ) : (
+        <Button onClick={handleModalOpen} variant="contained">
+          Connect
+        </Button>
+      )}
+
       <Modal open={showModal} onClose={handleModalClose}>
         <Box sx={style}>
           <h1 style={{ textAlign: 'center' }} className="h1">
