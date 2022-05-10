@@ -1,3 +1,26 @@
 {
-  "hello": "!hello!"
+  "site_title": "Dante finance",
+
+  "wallet_name": "Wallet: {{name}}",
+
+  "wallet": {
+    "metamask": {
+      "label": "Metamask"
+    }
+  },
+
+  "page_header": {
+    "navigation": {
+      "vaults": "Vaults"
+    },
+    "connect": {
+      "title": "Choose wallet",
+      "disconnect_action": "Disconnect",
+      "connect_action": "Connect <visually-hidden>to wallet</visually-hidden>"
+    }
+  },
+
+  "home": {
+    "title": "Home"
+  }
 }
