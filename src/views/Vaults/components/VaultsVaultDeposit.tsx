@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { VaultPool } from 'dante-finance/types';
 
-import useApproveVault, { ApprovalState } from 'hooks/useApproveVault';
+import { useVaultApprove, VaultApproveStatus } from 'hooks/useVaultApprove';
 import useDanteFinance from 'hooks/useDanteFinance';
 
 import { VaultsAmountForm } from './VaultsAmountForm';
@@ -24,7 +24,7 @@ export function VaultsVaultDeposit(
   const { vaultContract: contract, wantBalance: balance, want } = props;
 
   const danteFinance = useDanteFinance();
-  const [approveStatus, approveVault] = useApproveVault(want, contract);
+  const [approveStatus, approveVault] = useVaultApprove(want, contract);
 
   const handleSubmitRequest = useCallback(
     (amount: number) =>
@@ -36,7 +36,7 @@ export function VaultsVaultDeposit(
     console.log(value.hash);
   }, []);
 
-  if (approveStatus === ApprovalState.PENDING) {
+  if (approveStatus === VaultApproveStatus.PENDING) {
     return (
       <article>
         <CircularProgress />
@@ -44,7 +44,7 @@ export function VaultsVaultDeposit(
     );
   }
 
-  if (approveStatus === ApprovalState.APPROVED) {
+  if (approveStatus === VaultApproveStatus.APPROVED) {
     return (
       <article>
         <VaultsAmountForm
