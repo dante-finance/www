@@ -5,11 +5,13 @@ import React, {
   useState,
 } from 'react';
 import Button from '@mui/material/Button';
-import Slider from '@mui/material/Slider';
+import Slider, { SliderProps } from '@mui/material/Slider';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import { useMutation } from 'react-query';
+
+import { useComponentId } from 'hooks/useComponentId';
 
 interface VaultsAmountFormProps<T> {
   inputMax: number;
@@ -42,8 +44,9 @@ export function VaultsAmountForm<T>(
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<boolean>(false);
 
-  // @todo review slider props
-  const handleSliderChange = useCallback((_event, value) => {
+  const handleSliderChange = useCallback<
+    Exclude<SliderProps['onChange'], undefined>
+  >((_event, value) => {
     setAmount(Number.isNaN(value) ? 0 : (value as number));
   }, []);
 
@@ -83,6 +86,8 @@ export function VaultsAmountForm<T>(
     setAmount(inputMax);
   }, [inputMax]);
 
+  const textFieldID = useComponentId();
+
   return (
     <form onSubmit={handleSubmit}>
       {submitSuccess && <Alert>Submit success!</Alert>}
@@ -108,9 +113,8 @@ export function VaultsAmountForm<T>(
         </Grid>
       </Grid>
 
-      {/* @todo A11Y unique ids*/}
       <TextField
-        id="amount"
+        id={textFieldID}
         label="Amount"
         variant="outlined"
         style={{ width: '100%' }}
