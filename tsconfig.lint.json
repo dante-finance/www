@@ -3,6 +3,7 @@
   "include": [
     "src",
     ".eslintrc.js",
-    "commitlint.config.js"
+    "commitlint.config.js",
+    "config-overrides.js"
   ]
 }
