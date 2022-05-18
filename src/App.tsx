@@ -8,7 +8,7 @@ import config from 'config';
 import { AppRoutes } from 'components/App/AppRoutes';
 import { AppLoader } from 'components/App/AppLoader';
 
-import { DanteFinanceProvider } from 'contexts/DanteFinance';
+import { DanteFinanceProvider } from 'contexts/DanteFinance/DanteFinanceProvider';
 
 import { AppQueryClient } from './queryClient';
 
@@ -27,7 +27,7 @@ function Providers(props: { children: React.ReactNode }): JSX.Element {
   );
 
   return (
-    <UseWalletProvider connectors={connectors}>
+    <UseWalletProvider autoConnect connectors={connectors}>
       <QueryClientProvider client={AppQueryClient}>
         <DanteFinanceProvider>{children}</DanteFinanceProvider>
       </QueryClientProvider>

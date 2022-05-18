@@ -2,13 +2,14 @@ import { BigNumber, Contract, ethers } from 'ethers';
 
 import { TransactionResponse } from '@ethersproject/providers';
 
+import { getDefaultProvider } from 'utils/provider';
+
+import { vaultDefinitions } from 'config';
+
 import { Configuration } from './config';
 import { VaultPool, VaultPoolDetails, Vault } from './types';
 
 import ERC20 from './ERC20';
-
-import { getDefaultProvider } from '../utils/provider';
-import { vaultDefinitions } from '../config';
 
 /**
  * An API module of Tomb Finance contracts.
@@ -60,17 +61,29 @@ export class DanteFinance {
     provider: ethers.providers.ExternalProvider,
     account: string,
   ): void {
-    console.log('unlock');
     const newProvider = new ethers.providers.Web3Provider(
       provider,
       this.config.chainId,
     );
+
     this.signer = newProvider.getSigner(0);
     this.myAccount = account;
+
     for (const [name, contract] of Object.entries(this.contracts)) {
       this.contracts[name] = contract.connect(this.signer);
     }
+
+    for (const token of Object.values(this.externalTokens)) {
+      token.connect(this.signer);
+    }
+
     console.log(`🔓 Wallet is unlocked. Welcome, ${account}!`);
+  }
+
+  disconnectWallet(): void {
+    this.myAccount = '';
+
+    //@todo check how to disconnect contracts
   }
 
   get isUnlocked(): boolean {
@@ -108,7 +121,7 @@ export class DanteFinance {
     vault: string,
   ): Promise<TransactionResponse> {
     const contract = this.contracts[vault];
-    return await contract.withdraw();
+    return await contract.withdraw(shares);
   }
 
   /**
@@ -166,19 +179,19 @@ export class DanteFinance {
 
     // get allowance value of sending want tokens to vault
     const allowance =
-      this.myAccount !== undefined
+      this.myAccount !== ''
         ? await want.allowance(this.myAccount, contract.address)
         : BigNumber.from('0');
 
     // get want balance
     const wantBalance =
-      this.myAccount !== undefined
+      this.myAccount !== ''
         ? await want.balanceOf(this.myAccount)
         : BigNumber.from('0');
 
     // get share balance
     const shareBalance =
-      this.myAccount !== undefined
+      this.myAccount !== ''
         ? await share.balanceOf(this.myAccount)
         : BigNumber.from('0');
 
@@ -186,7 +199,7 @@ export class DanteFinance {
     // calculate APY
     const apy = 0;
 
-    return {
+    const result = {
       contract: definition.contract,
       name: definition.poolName,
       want: want.symbol,
@@ -198,5 +211,7 @@ export class DanteFinance {
       apy: apy,
       tvl: tvl,
     };
+
+    return result;
   }
 }

@@ -16,18 +16,14 @@ export function DanteFinanceProvider(
   const { children } = props;
 
   const { ethereum, account } = useWallet();
-  const [danteFinance, setDanteFinance] = useState<DanteFinance | null>(null);
+  const [danteFinance] = useState<DanteFinance>(() => new DanteFinance(config));
 
   useEffect(() => {
-    if (!danteFinance) {
-      const api = new DanteFinance(config);
-      if (account) {
-        // wallet was unlocked at initialization
-        api.unlockWallet(ethereum, account);
-      }
-      setDanteFinance(api);
-    } else if (account) {
+    if (account) {
+      // wallet was unlocked at initialization
       danteFinance.unlockWallet(ethereum, account);
+    } else {
+      danteFinance.disconnectWallet();
     }
   }, [account, ethereum, danteFinance]);
 
