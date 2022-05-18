@@ -18,12 +18,12 @@ interface VaultsVaultProps {
 export function VaultsVault(props: VaultsVaultProps): JSX.Element {
   const { vaultContract } = props;
 
-  const api = useDanteFinance();
+  const danteFinance = useDanteFinance();
 
   // we need to add api.myAccount to query key in order to get updated data when user changes account
   const { isLoading, error, data } = useQuery(
-    ['vaults', 'info', vaultContract, api.myAccount],
-    () => api.getVault(vaultContract),
+    ['vaults', 'info', vaultContract, danteFinance.myAccount],
+    () => danteFinance.getVault(vaultContract),
   );
 
   if (isLoading) {
@@ -36,7 +36,7 @@ export function VaultsVault(props: VaultsVaultProps): JSX.Element {
 
   const vaultInfo = data as VaultPoolDetails;
 
-  if (api.myAccount !== '') {
+  if (danteFinance.myAccount !== '') {
     return (
       <Grid container style={{ color: 'black' }}>
         <Grid item md={6}>

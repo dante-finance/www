@@ -41,8 +41,8 @@ export function VaultsAmountForm<T>(
 
   const [amount, setAmount] = useState(0);
 
-  const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
-  const [submitError, setSubmitError] = useState<boolean>(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const handleSliderChange = useCallback<
     Exclude<SliderProps['onChange'], undefined>
@@ -82,7 +82,7 @@ export function VaultsAmountForm<T>(
     [amount, mutate],
   );
 
-  const handleOnMax = useCallback(async () => {
+  const handleMaxValue = useCallback(() => {
     setAmount(inputMax);
   }, [inputMax]);
 
@@ -106,7 +106,7 @@ export function VaultsAmountForm<T>(
             color="primary"
             variant="contained"
             size="small"
-            onClick={handleOnMax}
+            onClick={handleMaxValue}
           >
             Max
           </Button>

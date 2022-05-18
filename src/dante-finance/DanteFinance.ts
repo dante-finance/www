@@ -2,13 +2,14 @@ import { BigNumber, Contract, ethers } from 'ethers';
 
 import { TransactionResponse } from '@ethersproject/providers';
 
+import { getDefaultProvider } from 'utils/provider';
+
+import { vaultDefinitions } from 'config';
+
 import { Configuration } from './config';
 import { VaultPool, VaultPoolDetails, Vault } from './types';
 
 import ERC20 from './ERC20';
-
-import { getDefaultProvider } from '../utils/provider';
-import { vaultDefinitions } from '../config';
 
 /**
  * An API module of Tomb Finance contracts.

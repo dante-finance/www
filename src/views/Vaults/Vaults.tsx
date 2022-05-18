@@ -41,7 +41,7 @@ export default function Vaults(): JSX.Element {
 
   return (
     <Page>
-      <h2>Dante Vaults</h2>
+      <h1>Dante Vaults</h1>
 
       {vaults.map((vault) => (
         <Accordion

@@ -27,4 +27,4 @@ function useInterval(callback: () => void, delay: number | null): void {
   }, [delay]);
 }
 
-export default useInterval;
+export { useInterval };

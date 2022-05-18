@@ -78,8 +78,7 @@ function useVaultApprove(lp: string, vault: string): UseVaultApproveResult {
 
   // check the current approval status
   const approvalStatus: VaultApproveStatus = useMemo(() => {
-    // currentAllowance was set by default to a BigNumber so probably this is useless
-    // if (!currentAllowance) return VaultApproveStatus.UNKNOWN;
+    if (!currentAllowance) return VaultApproveStatus.UNKNOWN;
 
     if (currentAllowance.gte(APPROVE_BASE_AMOUNT))
       return VaultApproveStatus.APPROVED;
