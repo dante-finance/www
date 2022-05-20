@@ -1,16 +1,8 @@
-import React from 'react';
+import styles from './NotFound.module.scss';
 
 export function NotFound(): JSX.Element {
   return (
-    <article
-      style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        textAlign: 'center',
-      }}
-    >
+    <article className={styles['not-found']}>
       <h1>URL Not Found.</h1>
       <a href="/">Go back home.</a>
     </article>

@@ -6,8 +6,10 @@
     "node": ">= 16.13.1",
     "npm": ">= 8.3.2"
   },
-  "dependencies": {
+  "devDependencies": {
     "@ac32/spookyswap-sdk": "1.0.0",
+    "@commitlint/cli": "17.0.0",
+    "@commitlint/config-conventional": "17.0.0",
     "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
     "@mui/material": "5.6.4",
@@ -18,19 +20,6 @@
     "@types/node": "^16.11.33",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.9",
-    "ethers": "^5.6.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-query": "3.38.1",
-    "react-scripts": "5.0.1",
-    "typescript": "4.6.4",
-    "use-wallet": "^0.13.6",
-    "web-vitals": "^2.1.4",
-    "web3": "1.7.3"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "17.0.0",
-    "@commitlint/config-conventional": "17.0.0",
     "assert": "2.0.0",
     "buffer": "6.0.3",
     "crypto-browserify": "3.12.0",
@@ -38,16 +27,30 @@
     "eslint-import-resolver-typescript": "2.7.1",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-prettier": "4.0.0",
+    "ethers": "^5.6.5",
     "https-browserify": "1.0.0",
     "husky": "8.0.1",
     "os-browserify": "0.3.0",
     "prettier": "2.6.2",
     "process": "0.11.10",
+    "react": "^17.0.2",
     "react-app-rewired": "2.2.1",
+    "react-dom": "^17.0.2",
+    "react-query": "3.38.1",
     "react-router-dom": "6.3.0",
+    "react-scripts": "5.0.1",
+    "sass": "1.52.0",
     "stream-browserify": "3.0.0",
     "stream-http": "3.2.0",
-    "url": "0.11.0"
+    "stylelint": "14.8.2",
+    "stylelint-config-prettier-scss": "0.0.1",
+    "stylelint-config-recess-order": "3.0.0",
+    "stylelint-config-recommended-scss": "6.0.0",
+    "typescript": "4.6.4",
+    "url": "0.11.0",
+    "use-wallet": "^0.13.6",
+    "web-vitals": "^2.1.4",
+    "web3": "1.7.3"
   },
   "scripts": {
     "prepare": "husky install",
@@ -55,8 +58,11 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./*.js src/**/*.ts src/**/*.tsx",
-    "lint:fix": "npm run lint -- --fix"
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "eslint ./*.js src/**/*.ts src/**/*.tsx",
+    "lint:js:fix": "npm run lint:js -- --fix",
+    "lint:css": "stylelint */**.scss",
+    "lint:css:fix": "npm run lint:css -- --fix"
   },
   "browserslist": {
     "production": [

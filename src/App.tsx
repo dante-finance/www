@@ -12,7 +12,7 @@ import { DanteFinanceProvider } from 'contexts/DanteFinance/DanteFinanceProvider
 
 import { AppQueryClient } from './queryClient';
 
-import './App.css';
+import './App.scss';
 
 function Providers(props: { children: React.ReactNode }): JSX.Element {
   const { children } = props;

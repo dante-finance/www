@@ -11,7 +11,7 @@ export function Page(props: PageProps): JSX.Element {
 
   return (
     <>
-      <header className="App-header">
+      <header className="app-header">
         <PageNav />
       </header>
       <main>{children}</main>
