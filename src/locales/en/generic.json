@@ -1,6 +1,10 @@
 {
   "site_title": "Dante finance",
 
+  "app_loader": {
+    "title": "Loading"
+  },
+
   "wallet_name": "Wallet: {{name}}",
 
   "wallet": {
@@ -22,5 +26,10 @@
 
   "home": {
     "title": "Home"
+  },
+
+  "not_found": {
+    "title": "URL Not Found",
+    "back_action": "Go back home"
   }
 }
