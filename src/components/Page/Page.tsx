@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { PageNav } from './Nav/PageNav';
 
@@ -8,6 +9,8 @@ interface PageProps {
 
 export function Page(props: PageProps): JSX.Element {
   const { children } = props;
+
+  useTranslation(['generic']);
 
   return (
     <>

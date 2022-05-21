@@ -1,0 +1,35 @@
+{
+  "site_title": "Dante finance",
+
+  "app_loader": {
+    "title": "Loading"
+  },
+
+  "wallet_name": "Wallet: {{name}}",
+
+  "wallet": {
+    "metamask": {
+      "label": "Metamask"
+    }
+  },
+
+  "page_header": {
+    "navigation": {
+      "vaults": "Vaults"
+    },
+    "connect": {
+      "title": "Choose wallet",
+      "disconnect_action": "Disconnect",
+      "connect_action": "Connect <visually-hidden>to wallet</visually-hidden>"
+    }
+  },
+
+  "home": {
+    "title": "Home"
+  },
+
+  "not_found": {
+    "title": "URL Not Found",
+    "back_action": "Go back home"
+  }
+}

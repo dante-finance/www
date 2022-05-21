@@ -1,15 +1,17 @@
+import { useCallback, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import { useCallback, useState } from 'react';
 
 import { useWallet } from 'use-wallet';
+
+import { Trans, useTranslation } from 'react-i18next';
 
 import metamaskLogo from 'assets/img/metamask-fox.svg';
 
 import { PageNavWalletCard } from './PageNavWalletCard';
 
-const style = {
+const modalStyle = {
   position: 'absolute' as const,
   top: '50%',
   left: '50%',
@@ -23,6 +25,7 @@ const style = {
 
 export function PageNavConnect(): JSX.Element {
   const { connect, reset, status, account } = useWallet();
+  const { t } = useTranslation(['generic']);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -46,26 +49,41 @@ export function PageNavConnect(): JSX.Element {
   return (
     <>
       {status === 'connected' ? (
-        <Button onClick={handleDisconnect} variant="contained">
-          {account}
-        </Button>
+        <>
+          <span className="visually-hidden">
+            {t('generic:wallet_name', { amount: account })}
+          </span>
+          <Button onClick={handleDisconnect} variant="contained">
+            <span aria-hidden>
+              {t('generic:wallet_name', { amount: account })}
+            </span>
+            <span className="visually-hidden">
+              {t('generic:page_header.connect.disconnect_action')}
+            </span>
+          </Button>
+        </>
       ) : (
         <Button onClick={handleModalOpen} variant="contained">
-          Connect
+          <Trans
+            i18nKey="generic:page_header.connect.connect_action"
+            components={{
+              'visually-hidden': <span className="visually-hidden" />,
+            }}
+          />
         </Button>
       )}
 
       <Modal open={showModal} onClose={handleModalClose}>
-        <Box sx={style}>
+        <Box sx={modalStyle}>
           <h1 style={{ textAlign: 'center' }} className="h1">
-            Choose wallet
+            {t('generic:page_header.connect.title')}
           </h1>
 
           <PageNavWalletCard
             icon={<img src={metamaskLogo} alt="" style={{ height: 32 }} />}
             onConnect={handleMetamaskConnect}
-            title="Metamask"
-          ></PageNavWalletCard>
+            title={t('generic:wallet.metamask.label')}
+          />
         </Box>
       </Modal>
     </>

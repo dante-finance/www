@@ -2,7 +2,7 @@ import { BigNumber, Contract, ethers } from 'ethers';
 
 import { TransactionResponse } from '@ethersproject/providers';
 
-import { getDefaultProvider } from 'utils/provider';
+import { getDefaultEthersProvider } from 'utils/ethersProvider';
 
 import { vaultDefinitions } from 'config';
 
@@ -27,7 +27,7 @@ export class DanteFinance {
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
-    const provider = getDefaultProvider();
+    const provider = getDefaultEthersProvider();
 
     // loads contracts from deployments
     this.contracts = {};
