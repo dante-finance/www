@@ -4,13 +4,15 @@ import { render, screen } from '@testing-library/react';
 import { setupI18nTest } from 'utils-test/setupI18nTest';
 
 import { Page } from './Page';
-import * as PageNavModule from './Nav/PageNav';
+import * as PageHeaderModule from './PageHeader';
 
 describe('<Page />', () => {
   beforeAll(setupI18nTest());
 
   beforeEach(() => {
-    jest.spyOn(PageNavModule, 'PageNav').mockImplementation(() => <>PageNav</>);
+    jest
+      .spyOn(PageHeaderModule, 'PageHeader')
+      .mockImplementation(() => <>PageNav</>);
   });
 
   it('should render content', () => {

@@ -1,7 +1,6 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { PageNav } from './Nav/PageNav';
+import { PageHeader } from './PageHeader';
 
 interface PageProps {
   children: React.ReactNode;
@@ -10,13 +9,9 @@ interface PageProps {
 export function Page(props: PageProps): JSX.Element {
   const { children } = props;
 
-  useTranslation(['generic']);
-
   return (
     <>
-      <header className="app-header">
-        <PageNav />
-      </header>
+      <PageHeader />
       <main>{children}</main>
     </>
   );
